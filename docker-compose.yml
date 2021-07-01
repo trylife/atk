@@ -1,0 +1,33 @@
+version: '2.1'
+services:
+  atk:
+    image: trylife/atk
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./app.yaml:/app/app.yaml
+    ports:
+      - 10101:8080
+    depends_on:
+      - "redis"
+  phpRedisAdmin:
+    image: erikdubbelboer/phpredisadmin:latest
+    restart: always
+    environment:
+      REDIS_1_HOST: redis
+    ports:
+      - 10102:80
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+  redis:
+    image: docker.io/redis:5.0-alpine
+    restart: always
+    ports:
+      - 10103:6379
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"

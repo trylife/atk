@@ -1,0 +1,10 @@
+app: atk
+
+storage: redis
+redis:
+  addr: redis:6379
+  password:
+  db: 0
+
+wechat_mini_program:
+  - { app_id: xxx, secret: xxx, comment: someApp }
